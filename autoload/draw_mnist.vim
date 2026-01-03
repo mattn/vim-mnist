@@ -3,15 +3,15 @@ let s:grid_height = 28
 
 let s:drawing = {}
 let s:is_inference_mode = v:false
+let s:mnist_model_file = expand('<sfile>:h:h:p') .. '/mnist_model.json'
 
 function! draw_mnist#start() abort
-  let l:mnist_model_file = expand('<sfile>:h:h') .. '/mnist_model.json'
-  if !filereadable(l:mnist_model_file)
-    echoerr "Model file not found: " l:mnist_model_file
+  if !filereadable(s:mnist_model_file)
+    echoerr "Model file not found: " s:mnist_model_file
     return
   endif
 
-  let s:ff = brain#load_model(l:mnist_model_file)
+  let s:ff = brain#load_model(s:mnist_model_file)
   let s:is_inference_mode = v:true
 
   vnew
